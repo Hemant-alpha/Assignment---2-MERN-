@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .error {
+            border: 2px solid red;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: left;
+            display: none;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Contact Form</h2>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name">
+            <p class="error-message" id="nameError">This field is required</p>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email">
+            <p class="error-message" id="emailError">A valid email address is required</p>
+
+            <label for="website">Website:</label>
+            <input type="text" id="website">
+            <p class="error-message" id="websiteError">A valid URL is required</p>
+
+            <label for="message">Message:</label>
+            <textarea id="message" rows="4"></textarea>
+            <p class="error-message" id="messageError">This field is required</p>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let isValid = true;
+
+            function showError(inputId, errorId, condition) {
+                let input = document.getElementById(inputId);
+                let error = document.getElementById(errorId);
+                if (condition) {
+                    input.classList.add("error");
+                    error.style.display = "block";
+                    isValid = false;
+                } else {
+                    input.classList.remove("error");
+                    error.style.display = "none";
+                }
+            }
+
+            showError("name", "nameError", document.getElementById("name").value.trim() === "");
+            showError("email", "emailError", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value));
+            showError("website", "websiteError", !/^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}\/?$/.test(document.getElementById("website").value));
+            showError("message", "messageError", document.getElementById("message").value.trim() === "");
+
+            if (isValid) {
+                alert("Form submitted successfully!");
+                document.getElementById("contactForm").reset();
+            }
+        });
+    </script>
+
+</body>
+</html>

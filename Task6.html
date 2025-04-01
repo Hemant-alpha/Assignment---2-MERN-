@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .input-box {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .input-box input {
+            width: 100%;
+            padding: 10px 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .input-box i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: gray;
+        }
+        .error {
+            border: 2px solid red;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: left;
+            display: none;
+        }
+        .login-btn {
+            width: 100%;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .login-btn:hover {
+            background-color: #007acc;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .options a {
+            color: #0095f6;
+            text-decoration: none;
+        }
+        .signup {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .signup a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Instagram</h2>
+        <form id="loginForm">
+            <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" placeholder="Username">
+                <p class="error-message" id="usernameError">Username is required</p>
+            </div>
+
+            <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password">
+                <p class="error-message" id="passwordError">Password is required</p>
+            </div>
+
+            <button type="submit" class="login-btn">Log in</button>
+
+            <div class="options">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <div class="signup">
+                Don't have an account? <a href="#">Sign up here.</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let isValid = true;
+
+            function showError(inputId, errorId, condition) {
+                let input = document.getElementById(inputId);
+                let error = document.getElementById(errorId);
+                if (condition) {
+                    input.classList.add("error");
+                    error.style.display = "block";
+                    isValid = false;
+                } else {
+                    input.classList.remove("error");
+                    error.style.display = "none";
+                }
+            }
+
+            showError("username", "usernameError", document.getElementById("username").value.trim() === "");
+            showError("password", "passwordError", document.getElementById("password").value.trim() === "");
+
+            if (isValid) {
+                alert("Login successful!");
+                document.getElementById("loginForm").reset();
+            }
+        });
+    </script>
+
+</body>
+</html>

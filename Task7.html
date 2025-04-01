@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Train</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h2 {
+            color: #003366;
+            font-size: 22px;
+            margin-top: 20px;
+        }
+        .container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            height: 250px;
+            overflow: hidden;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+        .train {
+            position: absolute;
+            bottom: 10px;
+            left: -150px;
+            width: 150px;
+            transition: transform 0.5s ease-in-out;
+        }
+        .cloud {
+            position: absolute;
+            top: 20px;
+            width: 80px;
+            opacity: 0.8;
+            animation: cloudMove 6s linear infinite;
+        }
+        .cloud1 { left: 10%; }
+        .cloud2 { left: 50%; width: 100px; animation-duration: 7s; }
+        .cloud3 { left: 80%; width: 120px; animation-duration: 8s; }
+
+        @keyframes cloudMove {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(100vw); }
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .start { background-color: #28a745; color: white; }
+        .start:hover { background-color: #218838; }
+        .stop { background-color: #dc3545; color: white; }
+        .stop:hover { background-color: #c82333; }
+    </style>
+</head>
+<body>
+
+    <h2>Click the buttons to control the train animation 🚂</h2>
+    <div class="container">
+        <img src="train.jpeg" class="train" id="train">
+    </div>
+
+    <div class="buttons">
+        <button class="btn start" onclick="startTrain()">Start</button>
+        <button class="btn stop" onclick="stopTrain()">Stop</button>
+    </div>
+
+    <script>
+        let train = document.getElementById("train");
+        let position = -150;
+        let moving = false;
+        let trainInterval;
+
+        function startTrain() {
+            if (!moving) {
+                moving = true;
+                trainInterval = setInterval(() => {
+                    if (position >= window.innerWidth) {
+                        position = -150;
+                    }
+                    position += 5;
+                    train.style.transform = `translateX(${position}px)`;
+                }, 50);
+            }
+        }
+
+        function stopTrain() {
+            moving = false;
+            clearInterval(trainInterval);
+        }
+    </script>
+
+</body>
+</html>

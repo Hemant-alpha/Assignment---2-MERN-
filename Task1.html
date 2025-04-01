@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse a Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Reverse a Number</h2>
+        <input type="number" id="numberInput" placeholder="Enter a number">
+        <button onclick="reverseNumber()">Reverse</button>
+        <p class="result" id="result"></p>
+    </div>
+
+    <script>
+        function reverseNumber() {
+            let num = document.getElementById("numberInput").value;
+            if (num === "") {
+                document.getElementById("result").innerText = "Please enter a number";
+                return;
+            }
+            let reversedNum = parseInt(num.toString().split('').reverse().join(''));
+            document.getElementById("result").innerText = "Reversed Number: " + reversedNum;
+        }
+    </script>
+</body>
+</html>
+
